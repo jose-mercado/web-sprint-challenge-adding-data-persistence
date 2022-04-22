@@ -1,7 +1,6 @@
 // build your `/api/projects` router here
 const router = require("express").Router();
 const projects = require("./model.js")
-const mw = require("./middleware.js")
 
 router.get("/", (req,res)=>{
     projects.find()
@@ -18,7 +17,7 @@ router.get("/", (req,res)=>{
     })
 })
 
-router.post("/", mw.validateProject, (req,res)=>{
+router.post("/", (req,res)=>{
     projects.insert(req.body)
     .then(project=>{
         project.project_completed ? project.project_completed = true : project.project_completed = false
